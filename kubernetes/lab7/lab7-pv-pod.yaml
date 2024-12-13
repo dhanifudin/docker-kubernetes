@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lab7-pv-pod
+spec:
+  volumes:
+    - name: lab7-pv-storage
+      persistentVolumeClaim:
+        claimName: lab7-pv-claim
+  containers:
+    - name: lab7-pv-container
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: lab7-pv-storage
