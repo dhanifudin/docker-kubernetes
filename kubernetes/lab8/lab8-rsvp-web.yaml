@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lab8-rsvp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lab8-rsvp
+  template:
+    metadata:
+      labels:
+        app: lab8-rsvp
+    spec:
+      containers:
+        - name: rsvp-app
+          image: teamcloudyuga/rsvpapp
+          env:
+          - name: MONGODB_HOST
+            value: lab8-mongodb
+          ports:
+          - containerPort: 5000
+            name: web-port

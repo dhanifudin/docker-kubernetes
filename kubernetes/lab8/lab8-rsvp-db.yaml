@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lab8-rsvp-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      appdb: lab8-rsvpdb
+  template:
+    metadata:
+      labels:
+        appdb: lab8-rsvpdb
+    spec:
+      containers:
+        - name: rsvpd-db
+          image: mongo:3.3
+          env:
+          - name: MONGODB_DATABASE
+            value: rsvpdata
+          ports:
+          - containerPort: 27017
